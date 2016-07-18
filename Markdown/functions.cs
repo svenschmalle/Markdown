@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace Markdown
 {
@@ -27,6 +28,15 @@ namespace Markdown
             string SaveDateiBase64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(AktuellerDateiname));
             string SaveFile = Path.Combine(getSavePath(), SaveDateiBase64);
             return SaveFile;
+        }
+
+        internal string getResourceFile(string Filename)
+        {
+            Assembly asm = Assembly.GetExecutingAssembly();
+            using (StreamReader textStreamReader = new StreamReader(asm.GetManifestResourceStream(Filename)))
+            {
+                return textStreamReader.ReadToEnd();
+            }
         }
     }
 }

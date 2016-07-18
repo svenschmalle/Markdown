@@ -73,11 +73,6 @@
     <Compile Include="functions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resource.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resource.resx</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -90,10 +85,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Resource.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <None Include="bin\Debug\test.md" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -105,6 +96,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Resources\Hilfe.md" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -112,6 +104,10 @@
   <ItemGroup>
     <Content Include="markdown.ico" />
     <Content Include="MetroFramework.txt" />
+    <EmbeddedResource Include="Resources\bootstrap-theme.min.css" />
+    <EmbeddedResource Include="Resources\bootstrap.min.css" />
+    <EmbeddedResource Include="Resources\bootstrap.min.js" />
+    <EmbeddedResource Include="Resources\jquery.min.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

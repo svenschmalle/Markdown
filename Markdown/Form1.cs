@@ -69,7 +69,7 @@ namespace Markdown
             webBrowser1.ScriptErrorsSuppressed = true;
             webBrowser1.DocumentText = RenderMarkDown(this.textBox1.Text);
             webBrowser_hilfe.ScriptErrorsSuppressed = true;
-            webBrowser_hilfe.DocumentText = RenderMarkDown(Resource.Hilfe);
+            webBrowser_hilfe.DocumentText = RenderMarkDown(_func.getResourceFile("Markdown.Resources.Hilfe.md"));
             this.ResumeLayout(true);
 
             // Timer für Auto-Save erstellen
@@ -125,12 +125,16 @@ namespace Markdown
             string WebseiteHTML = @"<!DOCTYPE HTML>
                                 <html>
                                 <head>
-                                <!-- Das neueste kompilierte und minimierte CSS -->
-                                <link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css>
-                                <!--Optionales Theme-- >
-                                <link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css>
-                                <!--Das neueste kompilierte und minimierte JavaScript-- >
-                                <script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js></script>
+                                <!-- Das neueste kompilierte und minimierte CSS-->
+                                <!--<link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css>-->
+                                <!--Optionales Theme-->
+                                <!--<link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css>-->
+                                <!--Das neueste kompilierte und minimierte JavaScript-->
+                                <!--<script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js></script>-->
+                                <style>" + _func.getResourceFile("Markdown.Resources.bootstrap.min.css") + @"</style>
+                                <style>" + _func.getResourceFile("Markdown.Resources.bootstrap-theme.min.css") + @"</style>
+                                <script language=javascript>" + _func.getResourceFile("Markdown.Resources.jquery.min.js") + @"</script>
+                                <script language=javascript>" + _func.getResourceFile("Markdown.Resources.bootstrap.min.js") + @"</script>
                                 </head>
                                 <body>" + HTML +
                                 @"</body></html>";
