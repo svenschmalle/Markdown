@@ -144,10 +144,12 @@
             this.Controls.Add(this.metroLabel_speichern);
             this.Controls.Add(this.tabControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "Form1";
             this.Padding = new System.Windows.Forms.Padding(20, 60, 1, 20);
             this.Text = "Markdown Editor";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.tabControl.ResumeLayout(false);
             this.tabPage_HTML.ResumeLayout(false);
             this.tabPage_MD.ResumeLayout(false);

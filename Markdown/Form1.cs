@@ -55,6 +55,21 @@ namespace Markdown
             this.ResumeLayout(true);
         }
 
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F11)
+            {
+                if (this.WindowState == FormWindowState.Maximized)
+                {
+                    this.WindowState = FormWindowState.Normal;
+                }
+                else
+                {
+                    this.WindowState = FormWindowState.Maximized;
+                }
+            }
+        }
+
         private void tabControl_Selected(object sender, TabControlEventArgs e)
         {
             if (e.TabPage == tabPage_HTML)
@@ -67,7 +82,6 @@ namespace Markdown
                 metroLabel_speichern.Visible = true;
             }           
         }
-
 
         private string RenderMarkDown(string MarkDownText)
         {
@@ -129,7 +143,5 @@ namespace Markdown
                 this.Style = MetroFramework.MetroColorStyle.Orange;
             }
         }
-
-        
     }
 }
