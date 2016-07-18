@@ -15,30 +15,48 @@ namespace Markdown
     public partial class Form1 : MetroForm
     {
         private string[] _args;
-        private string AktuellerDateiName;
-        private string OriginalText;
+        private string _AktuellerDateiName;
+        private string _OriginalText;
+        private string _OriginalTextAuto;
         private Markdig.MarkdownPipeline _Pipeline;
-        
+        private Timer _Timer;
+        private functions _func;
+
         public Form1(string[] args)
         {
             InitializeComponent();
             _args = args;
+            _Timer = new Timer();
+            _func = new functions();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             if (_args.Length == 0)
             {
-                OriginalText = "# Neue Seite\r\nDer Seiten-Inhalt kann über \"Markdown Text\" geändert werden.";
+                _OriginalText = "# Neue Seite\r\nDer Seiten-Inhalt kann über \"Markdown Text\" geändert werden.";
+                this.textBox1.Text = _OriginalText;
             }
             else
             {
-                AktuellerDateiName = _args[0];
-                OriginalText = File.ReadAllText(AktuellerDateiName);
+                // Übergebene Datei laden
+                _AktuellerDateiName = _args[0];
+                _OriginalText = File.ReadAllText(_AktuellerDateiName);
+                _OriginalTextAuto = File.ReadAllText(_AktuellerDateiName);
+                this.textBox1.Text = _OriginalText;
+
+                if (File.Exists(_func.getSaveFile(_AktuellerDateiName)))
+                {
+                    DialogResult dlr = MessageBox.Show("Es wurde eine Auto-Save Datei gefunden, soll diese geladen werden?", "Auto-Save Datei laden?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dlr == DialogResult.Yes)
+                    {
+                        _OriginalTextAuto = File.ReadAllText(_func.getSaveFile(_AktuellerDateiName));
+                        this.textBox1.Text = _OriginalTextAuto;
+                    }
+                }
             }
 
             this.SuspendLayout();
-            this.textBox1.Text = OriginalText;
 
             var pipelineb = new Markdig.MarkdownPipelineBuilder();
             pipelineb = Markdig.MarkdownExtensions.UseBootstrap(pipelineb);
@@ -53,6 +71,23 @@ namespace Markdown
             webBrowser_hilfe.ScriptErrorsSuppressed = true;
             webBrowser_hilfe.DocumentText = RenderMarkDown(Resource.Hilfe);
             this.ResumeLayout(true);
+
+            // Timer für Auto-Save erstellen
+            _Timer.Interval = 1000 * 10; // 10 Sek
+            _Timer.Enabled = true;
+            _Timer.Start();
+            _Timer.Tick += Timer_Tick;
+
+            // Pfad für Auto-Save erstellen falls nicht vorhanden
+            _func.makeSavePath();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(_AktuellerDateiName))
+            {
+                Speichern(true);
+            }
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -103,44 +138,76 @@ namespace Markdown
             return  WebseiteHTML;
         }
 
-        private void Speichern()
+        private void Speichern(bool auto)
         {
             // DateiAuswahl, falls es sich um eine neue Datei handelt
-            if (string.IsNullOrEmpty(AktuellerDateiName))
+            if (string.IsNullOrEmpty(_AktuellerDateiName))
             {
                 SaveFileDialog SaveDlg = new SaveFileDialog();
                 SaveDlg.Filter = "Markdown Dateien (*.md)|*.md|Alle Dateien (*.*)|*.*";
                 SaveDlg.ShowDialog();
-                AktuellerDateiName = SaveDlg.FileName;
+                _AktuellerDateiName = SaveDlg.FileName;
             }
 
-            if (!string.IsNullOrEmpty(AktuellerDateiName))
+            if (!string.IsNullOrEmpty(_AktuellerDateiName))
             {
-                OriginalText = this.textBox1.Text;
-                File.WriteAllText(AktuellerDateiName, this.textBox1.Text);
-                this.Style = MetroFramework.MetroColorStyle.Green;
+                // Beim Automatischen speichern soll in eine seperate Datei gespeichert werden
+                if (auto && _OriginalTextAuto!= this.textBox1.Text)
+                {
+                    _OriginalTextAuto = this.textBox1.Text;                   
+                    File.WriteAllText(_func.getSaveFile(_AktuellerDateiName), this.textBox1.Text);
+                }
+
+                // Beim Normalen speichern soll in die Original-Datei gespeichert werden
+                if (!auto && _OriginalText != this.textBox1.Text)
+                {
+                    _OriginalText = this.textBox1.Text;
+                    File.WriteAllText(_AktuellerDateiName, this.textBox1.Text);
+                    this.Style = MetroFramework.MetroColorStyle.Green;
+                    
+                    // Wenn durch den Anwender gespeichert wurde, kann das Save-File gelöscht werden
+                    File.Delete(_func.getSaveFile(_AktuellerDateiName));
+                }
             }
         }
 
         private void metroLabel_speichern_Click(object sender, EventArgs e)
         {
-            Speichern();
+            Speichern(false);
         }
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.S)       // Ctrl-S Save
             {
-                Speichern();
+                Speichern(false);
                 e.SuppressKeyPress = true;
             }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            if (textBox1.Text != OriginalText)
+            if (textBox1.Text != _OriginalText)
             {
                 this.Style = MetroFramework.MetroColorStyle.Orange;
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (_OriginalText != this.textBox1.Text)
+            {
+                DialogResult dlr = MessageBox.Show("Soll die Datei vor dem Beenden gespeichert werden?", "Speichern?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (dlr == DialogResult.Yes)
+                {
+                    Speichern(false);
+                    // Nach dem Speichern kann das Save-File gelöscht werden
+                    File.Delete(_func.getSaveFile(_AktuellerDateiName)); 
+                }
+                else if (dlr == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
             }
         }
     }
