@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
 [assembly: AssemblyTitle("Markdown")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Ein Markdown Viewer und Editor für Windows")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Markdown")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyProduct("Markdown Editor")]
+[assembly: AssemblyCopyright("Copyright ©  2016 - frickelblog.de")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

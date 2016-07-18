@@ -1,0 +1,317 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Hilfe" xml:space="preserve">
+    <value>&lt;span style="width:100%;position:fixed;text-align:right;"&gt;[Inhaltsverzeichnis](#inhaltsverzeichnis)&lt;/span&gt;
+
+# MarkDown Editor Syntax Hilfe
+
+### Inhaltsverzeichnis
+
+- [Überschriften](#uberschriften)
+- [Text-Formatierung](#text-formatierung)
+- [Listen](#listen)
+- [Zitate](zitate)
+- [Links](links)
+- [Bilder](bilder)
+- [ToDo-Listen](todo-listen)
+- [Tabellen (Pipe-Style)](#tabellen-pipe-style)
+- [Tabellen (grid-Style)](#tabellen-grid-style)
+
+----
+
+#### Überschriften    
+```
+# Header 1
+## Header 2
+### Header 3
+#### Header 4
+##### Header 5
+###### Header 6
+```
+
+# Header 1
+## Header 2
+### Header 3
+#### Header 4
+##### Header 5
+###### Header 6
+
+----
+#### Text-Formatierung
+
+```**Bold**``` 
+**Bold** 
+
+```*Italic*```
+*Italic* 
+
+```~~Strikethrough~~ ```
+~~Strikethrough~~
+
+-----
+#### Listen
+
+```
+- Listenpunkt1
+  - Listenpunkt2
+- Listenpunkt3
+```
+- Listenpunkt1
+  - Listenpunkt2
+- Listenpunkt3
+
+```
+1. James Madison
+2. James Monroe
+3. John Quincy Adams
+```
+
+1. James Madison
+2. James Monroe
+3. John Quincy Adams
+
+```
+1. Make my changes
+    1. Fix bug
+    2. Improve formatting
+    * Make the headings bigger
+2. Push my commits to GitHub
+3. Open a pull request
+    * Describe my changes
+    * Mention all the members of my team
+        * Ask for feedback
+```
+
+1. Make my changes
+    1. Fix bug
+    2. Improve formatting
+    * Make the headings bigger
+2. Push my commits to GitHub
+3. Open a pull request
+    * Describe my changes
+    * Mention all the members of my team
+        * Ask for feedback
+
+-----
+#### Zitate
+
+```
+In the words of Abraham Lincoln:
+&gt; Pardon my French
+```
+
+In the words of Abraham Lincoln:
+&gt; Pardon my French
+
+-----
+#### Links
+
+Syntax: 
+
+`[Link Text](http://www.link.de)`
+
+Beispiel:
+
+```
+Dies ist ein Beispiel [Link Text](http://www.link.de).
+```
+
+Ausgabe: 
+
+Dies ist ein Beispiel [Link Text](http://www.link.de).
+
+-----
+#### Bilder
+
+Syntax: 
+
+`[![Tooltip Text](http://www.URLzumBild.de/Bild.jpg)]`
+
+Beispiel:
+
+```
+[![Bild](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABmCAMAAAAOARRQAAAAY1BMVEX///8AAAAwMDCGhoZhYWH09PSlpaX19fXOzs78/PwYGBhMTEzq6uooKChlZWXj4+OsrKwfHx/X19c+Pj45OTm5ubl8fHyenp7d3d0QEBC/v7+Li4txcXGUlJRJSUlWVlZ4eHhwNMP8AAACLElEQVRoge2Z65KiMBCFuxUExAsCKuCFff+nXMARkk4yZmo7qdmqnF/qCXwk3XQuAgQFBQUFBQX9XnWHeuVIddR9QZoenSpvRkpZuaUgViVA4rgvo/oEzu4piGfw0JkhPLD1gdmCDwpiwPwnmFasRie18Vb0pRSV6tgnzEGsp2VN255S0b+JViYY2SdMJNVtpT5sJHstWrFgxD/DwEVuSlw2TJaLZrVzhIFGCM8+JSYfBs5LOl2px4hZwhNl1OLEwPPlnBQKL+a4nyg0MNyY19tzVTvDjMmG2x0SjcGLgSSqYt3vzBgoNYFxgDEoYAKGB9M19Ma7gmD6HW0it+8tMNcDrTCXC+3NRVOEZmV/bHqzwYd8WYFrisECzNpYDdoG2078nq40mNY8bMfWEoN1KVw1LAxUDOa6qjoqftqlwNjnaH7Y7I5aDD704cmkZdwHDM5Bf6ABo5vxBnXbn2DeMe7QhMFaN2zxXqJ8xOD0sOXKjJGXxF+SVng2mOdxeM8i/AYzbGCpxFy2w+A9me9owIgJOSklQ2aDwWvx/mTA4F2exXfq7twCs8iEIUvStXolDwbFrNYdaDBhqiWrj0pg+DCLNZULZ5i5Vj90FD5M9ZoFU83OmGKk97lQG99E/0bM6eLEcDjHtGEfNWa1NjAU848qdSPAj+k743kmJ6bVh58b8418YTwdQtJ5zolyXwfEno67PR3eAzSOw5O/txZd5OGPlaCgoKCgoKDfqL+n/yIR0u2vJwAAAABJRU5ErkJggg==)]
+```
+Ausgabe:
+
+[![Bild](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABmCAMAAAAOARRQAAAAY1BMVEX///8AAAAwMDCGhoZhYWH09PSlpaX19fXOzs78/PwYGBhMTEzq6uooKChlZWXj4+OsrKwfHx/X19c+Pj45OTm5ubl8fHyenp7d3d0QEBC/v7+Li4txcXGUlJRJSUlWVlZ4eHhwNMP8AAACLElEQVRoge2Z65KiMBCFuxUExAsCKuCFff+nXMARkk4yZmo7qdmqnF/qCXwk3XQuAgQFBQUFBQX9XnWHeuVIddR9QZoenSpvRkpZuaUgViVA4rgvo/oEzu4piGfw0JkhPLD1gdmCDwpiwPwnmFasRie18Vb0pRSV6tgnzEGsp2VN255S0b+JViYY2SdMJNVtpT5sJHstWrFgxD/DwEVuSlw2TJaLZrVzhIFGCM8+JSYfBs5LOl2px4hZwhNl1OLEwPPlnBQKL+a4nyg0MNyY19tzVTvDjMmG2x0SjcGLgSSqYt3vzBgoNYFxgDEoYAKGB9M19Ma7gmD6HW0it+8tMNcDrTCXC+3NRVOEZmV/bHqzwYd8WYFrisECzNpYDdoG2078nq40mNY8bMfWEoN1KVw1LAxUDOa6qjoqftqlwNjnaH7Y7I5aDD704cmkZdwHDM5Bf6ABo5vxBnXbn2DeMe7QhMFaN2zxXqJ8xOD0sOXKjJGXxF+SVng2mOdxeM8i/AYzbGCpxFy2w+A9me9owIgJOSklQ2aDwWvx/mTA4F2exXfq7twCs8iEIUvStXolDwbFrNYdaDBhqiWrj0pg+DCLNZULZ5i5Vj90FD5M9ZoFU83OmGKk97lQG99E/0bM6eLEcDjHtGEfNWa1NjAU848qdSPAj+k743kmJ6bVh58b8418YTwdQtJ5zolyXwfEno67PR3eAzSOw5O/txZd5OGPlaCgoKCgoKDfqL+n/yIR0u2vJwAAAABJRU5ErkJggg==)](http://www.frickelblog.de)
+
+Alternativ: Bild mit Link: 
+
+`[![Tooltip Text](http://www.URLzumBild.de/Bild.jpg)](http://www.frickelblog.de)`
+
+-----
+#### ToDo-Listen
+
+```
+- [x] ToDo 1
+- [ ] ToDo 2
+- [ ] ToDo 3
+```
+- [x] ToDo 1
+- [ ] ToDo 2
+- [ ] ToDo 3
+
+
+-----
+#### Tabellen (Pipe-Style)
+
+```
+|Right | Left | Default | Center |
+|-----:|:-----|---------|:------:|
+|  12  |  12  |    12   |    12  |
+| 123  |  123 |   123   |   123  |
+|   1  |    1 |     1   |     1  |
+```
+
+|Right | Left | Default | Center |
+|-----:|:-----|---------|:------:|
+|  12  |  12  |    12   |    12  |
+| 123  |  123 |   123   |   123  |
+|   1  |    1 |     1   |     1  |
+
+
+-----
+#### Tabellen (Grid-Style)
+
+```
++---------------+---------------+--------------------+
+| Fruit         | Price         | Advantages         |
++===============+===============+====================+
+| Bananas       | $1.34         | - built-in wrapper |
+|               |               | - bright color     |
++---------------+---------------+--------------------+
+| Oranges       | $2.10         | - cures scurvy     |
+|               |               | - tasty            |
++---------------+---------------+--------------------+
+```
+
++---------------+---------------+--------------------+
+| Fruit         | Price         | Advantages         |
++===============+===============+====================+
+| Bananas       | $1.34         | - built-in wrapper |
+|               |               | - bright color     |
++---------------+---------------+--------------------+
+| Oranges       | $2.10         | - cures scurvy     |
+|               |               | - tasty            |
++---------------+---------------+--------------------+
+</value>
+  </data>
+</root>
