@@ -34,9 +34,9 @@
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.tabPage_MD = new MetroFramework.Controls.MetroTabPage();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.metroLabel_speichern = new MetroFramework.Controls.MetroLabel();
             this.tabPage_Hilfe = new MetroFramework.Controls.MetroTabPage();
             this.webBrowser_hilfe = new System.Windows.Forms.WebBrowser();
+            this.metroLabel_speichern = new MetroFramework.Controls.MetroLabel();
             this.tabControl.SuspendLayout();
             this.tabPage_HTML.SuspendLayout();
             this.tabPage_MD.SuspendLayout();
@@ -101,18 +101,7 @@
             this.textBox1.Size = new System.Drawing.Size(1189, 833);
             this.textBox1.TabIndex = 0;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // metroLabel_speichern
-            // 
-            this.metroLabel_speichern.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.metroLabel_speichern.AutoSize = true;
-            this.metroLabel_speichern.Location = new System.Drawing.Point(1150, 67);
-            this.metroLabel_speichern.Name = "metroLabel_speichern";
-            this.metroLabel_speichern.Size = new System.Drawing.Size(66, 19);
-            this.metroLabel_speichern.TabIndex = 3;
-            this.metroLabel_speichern.Text = "Speichern";
-            this.metroLabel_speichern.Visible = false;
-            this.metroLabel_speichern.Click += new System.EventHandler(this.metroLabel_speichern_Click);
+            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             // 
             // tabPage_Hilfe
             // 
@@ -134,6 +123,18 @@
             this.webBrowser_hilfe.Name = "webBrowser_hilfe";
             this.webBrowser_hilfe.Size = new System.Drawing.Size(1189, 833);
             this.webBrowser_hilfe.TabIndex = 3;
+            // 
+            // metroLabel_speichern
+            // 
+            this.metroLabel_speichern.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroLabel_speichern.AutoSize = true;
+            this.metroLabel_speichern.Location = new System.Drawing.Point(1150, 67);
+            this.metroLabel_speichern.Name = "metroLabel_speichern";
+            this.metroLabel_speichern.Size = new System.Drawing.Size(66, 19);
+            this.metroLabel_speichern.TabIndex = 3;
+            this.metroLabel_speichern.Text = "Speichern";
+            this.metroLabel_speichern.Visible = false;
+            this.metroLabel_speichern.Click += new System.EventHandler(this.metroLabel_speichern_Click);
             // 
             // Form1
             // 

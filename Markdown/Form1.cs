@@ -89,7 +89,7 @@ namespace Markdown
             return  WebseiteHTML;
         }
 
-        private void metroLabel_speichern_Click(object sender, EventArgs e)
+        private void Speichern()
         {
             // DateiAuswahl, falls es sich um eine neue Datei handelt
             if (string.IsNullOrEmpty(AktuellerDateiName))
@@ -108,6 +108,20 @@ namespace Markdown
             }
         }
 
+        private void metroLabel_speichern_Click(object sender, EventArgs e)
+        {
+            Speichern();
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.S)       // Ctrl-S Save
+            {
+                Speichern();
+                e.SuppressKeyPress = true;
+            }
+        }
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             if (textBox1.Text != OriginalText)
@@ -115,5 +129,7 @@ namespace Markdown
                 this.Style = MetroFramework.MetroColorStyle.Orange;
             }
         }
+
+        
     }
 }
