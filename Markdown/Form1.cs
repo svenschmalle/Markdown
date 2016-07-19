@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MetroFramework.Forms;
+using FastColoredTextBoxNS;
+using System.Text.RegularExpressions;
 
 namespace Markdown
 {
@@ -22,6 +24,15 @@ namespace Markdown
         private Timer _Timer;
         private functions _func;
 
+        Style _HeaderStyle;
+        Style _LinkStyle;
+        Style _BoldStyle;
+        Style _CodeStyle;
+        Style _HRStyle;
+        Style _ItalicStyle;
+        Style _DelStyle;
+        Style _QuoteStyle;
+
         public Form1(string[] args)
         {
             InitializeComponent();
@@ -32,10 +43,15 @@ namespace Markdown
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.SuspendLayout();
+
+            SetTextBoxStyles();
+
             if (_args.Length == 0)
             {
                 _OriginalText = "# Neue Seite\r\nDer Seiten-Inhalt kann über \"Markdown Text\" geändert werden.";
-                this.textBox1.Text = _OriginalText;
+                fastColoredTextBox1.Text = _OriginalText;
+                this.Style = MetroFramework.MetroColorStyle.Blue;
             }
             else
             {
@@ -43,7 +59,7 @@ namespace Markdown
                 _AktuellerDateiName = _args[0];
                 _OriginalText = File.ReadAllText(_AktuellerDateiName);
                 _OriginalTextAuto = File.ReadAllText(_AktuellerDateiName);
-                this.textBox1.Text = _OriginalText;
+                fastColoredTextBox1.Text = _OriginalText;
 
                 if (File.Exists(_func.getSaveFile(_AktuellerDateiName)))
                 {
@@ -51,13 +67,15 @@ namespace Markdown
                     if (dlr == DialogResult.Yes)
                     {
                         _OriginalTextAuto = File.ReadAllText(_func.getSaveFile(_AktuellerDateiName));
-                        this.textBox1.Text = _OriginalTextAuto;
+                        fastColoredTextBox1.Text = _OriginalTextAuto;
                     }
                 }
             }
 
-            this.SuspendLayout();
-
+            // Laden des Textes in die FastColoredtextBox löst das TextChanged-Event aus, darum hier noch mal den Style auf BLAU setzen
+            this.Style = MetroFramework.MetroColorStyle.Blue;
+            
+            // PipeLineBuilder für Markdig erstellen
             var pipelineb = new Markdig.MarkdownPipelineBuilder();
             pipelineb = Markdig.MarkdownExtensions.UseBootstrap(pipelineb);
             pipelineb = Markdig.MarkdownExtensions.UsePipeTables(pipelineb);
@@ -66,11 +84,12 @@ namespace Markdown
             pipelineb = Markdig.MarkdownExtensions.UseAdvancedExtensions(pipelineb);
             _Pipeline = pipelineb.Build();
 
+            // WebBrowser für HTML-Vorschau und Hilfe
             webBrowser1.ScriptErrorsSuppressed = true;
-            webBrowser1.DocumentText = RenderMarkDown(this.textBox1.Text);
+            webBrowser1.DocumentText = RenderMarkDown(fastColoredTextBox1.Text);
             webBrowser_hilfe.ScriptErrorsSuppressed = true;
             webBrowser_hilfe.DocumentText = RenderMarkDown(_func.getResourceFile("Markdown.Resources.Hilfe.md"));
-            this.ResumeLayout(true);
+            
 
             // Timer für Auto-Save erstellen
             _Timer.Interval = 1000 * 10; // 10 Sek
@@ -80,6 +99,20 @@ namespace Markdown
 
             // Pfad für Auto-Save erstellen falls nicht vorhanden
             _func.makeSavePath();
+
+            this.ResumeLayout(true);
+        }
+
+        private void SetTextBoxStyles()
+        {
+            _HeaderStyle = new TextStyle(Brushes.Orange, null, FontStyle.Bold);
+            _LinkStyle = new TextStyle(Brushes.Blue, null, FontStyle.Italic);
+            _BoldStyle = new TextStyle(null, null, FontStyle.Bold);
+            _ItalicStyle = new TextStyle(null, null, FontStyle.Italic);
+            _DelStyle = new TextStyle(null, null, FontStyle.Strikeout);
+            _QuoteStyle = new TextStyle(Brushes.SeaGreen, Brushes.LavenderBlush, FontStyle.Regular);
+            _CodeStyle = new TextStyle(Brushes.Red, Brushes.LavenderBlush, FontStyle.Regular);
+            _HRStyle = new TextStyle(Brushes.Orange, null, FontStyle.Bold | FontStyle.Underline);
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -109,7 +142,7 @@ namespace Markdown
         {
             if (e.TabPage == tabPage_HTML)
             {
-                webBrowser1.DocumentText = RenderMarkDown(this.textBox1.Text);
+                webBrowser1.DocumentText = RenderMarkDown(fastColoredTextBox1.Text);
                 metroLabel_speichern.Visible = false;
             }
             else
@@ -156,17 +189,17 @@ namespace Markdown
             if (!string.IsNullOrEmpty(_AktuellerDateiName))
             {
                 // Beim Automatischen speichern soll in eine seperate Datei gespeichert werden
-                if (auto && _OriginalTextAuto!= this.textBox1.Text)
+                if (auto && _OriginalTextAuto!= fastColoredTextBox1.Text)
                 {
-                    _OriginalTextAuto = this.textBox1.Text;                   
-                    File.WriteAllText(_func.getSaveFile(_AktuellerDateiName), this.textBox1.Text);
+                    _OriginalTextAuto = fastColoredTextBox1.Text;                   
+                    File.WriteAllText(_func.getSaveFile(_AktuellerDateiName), fastColoredTextBox1.Text);
                 }
 
                 // Beim Normalen speichern soll in die Original-Datei gespeichert werden
-                if (!auto && _OriginalText != this.textBox1.Text)
+                if (!auto && _OriginalText != fastColoredTextBox1.Text)
                 {
-                    _OriginalText = this.textBox1.Text;
-                    File.WriteAllText(_AktuellerDateiName, this.textBox1.Text);
+                    _OriginalText = fastColoredTextBox1.Text;
+                    File.WriteAllText(_AktuellerDateiName, fastColoredTextBox1.Text);
                     this.Style = MetroFramework.MetroColorStyle.Green;
                     
                     // Wenn durch den Anwender gespeichert wurde, kann das Save-File gelöscht werden
@@ -180,7 +213,7 @@ namespace Markdown
             Speichern(false);
         }
 
-        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        private void fastColoredTextBox1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.S)       // Ctrl-S Save
             {
@@ -189,17 +222,9 @@ namespace Markdown
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            if (textBox1.Text != _OriginalText)
-            {
-                this.Style = MetroFramework.MetroColorStyle.Orange;
-            }
-        }
-
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (_OriginalText != this.textBox1.Text)
+            if (_OriginalText != fastColoredTextBox1.Text)
             {
                 DialogResult dlr = MessageBox.Show("Soll die Datei vor dem Beenden gespeichert werden?", "Speichern?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (dlr == DialogResult.Yes)
@@ -214,5 +239,41 @@ namespace Markdown
                 }
             }
         }
+
+        private void fastColoredTextBox1_TextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
+        {
+            e.ChangedRange.ClearStyle(_HeaderStyle, _LinkStyle, _BoldStyle, _CodeStyle,_HRStyle);
+
+            /*
+            '/(#+)(.*)/'                    => 'self::header',          // headers
+		    '/\[([^\[]+)\]\(([^\)]+)\)/'    => '<a href=\'\2\'>\1</a>', // links
+		    '/(\*\*|__)(.*?)\1/'            => '<strong>\2</strong>',   // bold
+		    '/(\*|_)(.*?)\1/'               => '<em>\2</em>',           // emphasis
+		    '/\~\~(.*?)\~\~/'               => '<del>\1</del>',         // del
+		    '/\:\"(.*?)\"\:/'               => '<q>\1</q>',             // quote
+		    '/`(.*?)`/'                     => '<code>\1</code>',       // inline code
+		    '/\n\*(.*)/'                    => 'self::ul_list',         // ul lists
+		    '/\n[0-9]+\.(.*)/'              => 'self::ol_list',         // ol lists
+		    '/\n(&gt;|\>)(.*)/'             => 'self::blockquote ',     // blockquotes
+		    '/\n-{5,}/'                     => "\n<hr />",              // horizontal rule
+            */
+
+            e.ChangedRange.SetStyle(_HeaderStyle,   @"(#+)(.*)");                   // header          
+            e.ChangedRange.SetStyle(_LinkStyle,     @"\[([^\[]+)\]\(([^\)]+)\)");   // links
+            e.ChangedRange.SetStyle(_BoldStyle,     @"(\*\*|__)(.*?)\1");           // bold
+            e.ChangedRange.SetStyle(_ItalicStyle,   @"(\*|__)(.*?)\1");             // italic
+            e.ChangedRange.SetStyle(_DelStyle,      @"\~\~(.*?)\~\~");              // del
+            e.ChangedRange.SetStyle(_HRStyle,       @"-{4,}");                      // horizontal rule
+            e.ChangedRange.SetStyle(_CodeStyle,     @"```");                        // inline code multiline
+            e.ChangedRange.SetStyle(_CodeStyle,     @"`(.*?)`");                    // inline code
+            e.ChangedRange.SetStyle(_QuoteStyle,    @">(.*)");                      //blockquotes
+
+
+            if (fastColoredTextBox1.Text != _OriginalText)
+            {
+                this.Style = MetroFramework.MetroColorStyle.Orange;
+            }
+        }
+
     }
 }
